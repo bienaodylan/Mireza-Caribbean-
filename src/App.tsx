@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Navigation } from './components/Navigation';
 import { WebsiteEditor } from './components/WebsiteEditor';
+import { MirezaHome } from './components/MirezaHome';
 import { HeroSection } from './components/HeroSection';
 import { InstagramGallery } from './components/InstagramGallery';
 import { CollectionsPresentation } from './components/CollectionsPresentation';
@@ -122,118 +123,5 @@ export default function App() {
 
   if (window.location.pathname === '/admin/website-editor') return <WebsiteEditor />;
 
-  return (
-    <div className="min-h-screen bg-[#FAF7F5] text-[#121212] flex flex-col font-sans selection:bg-[#E8B4B8] selection:text-black">
-      {/* SECTION 01 — NAVIGATION */}
-      <Navigation
-        cartCount={cartItems.reduce((acc, item) => acc + item.quantity, 0)}
-        wishlistCount={wishlist.length}
-        onOpenCart={() => setIsCartOpen(true)}
-        onOpenWishlist={() => setIsWishlistOpen(true)}
-        onOpenSearch={() => setIsSearchOpen(true)}
-        onNavigate={handleNavigate}
-      />
-
-      <main className="flex-1">
-        {/* SECTION 02 — HERO / DISCOVERY SCROLL */}
-        <HeroSection
-          onExploreCollection={(id) => handleNavigate(id)}
-          onExploreNew={() => handleNavigate('collection-01')}
-        />
-
-        {/* SECTION 03 — GALERIE INSTAGRAM (DÉFILEMENT CONTINU) */}
-        <InstagramGallery />
-
-        {/* SECTION 04 — GRANDE PRÉSENTATION DES COLLECTIONS & GRILLE 4-COLONNES STYLE SKIMS */}
-        <CollectionsPresentation
-          onSelectCategory={() => handleNavigate('collection-01')}
-        />
-
-        {/* SECTION 05 — COLLECTION PRINCIPALE 01 (PANTHÈRE ROSE) */}
-        <CollectionBlock
-          id="collection-01"
-          number="COLLECTION 01"
-          subtitle="SATIN POUDRÉ & LÉOPARD"
-          title="PANTHÈRE ROSE"
-          description="L'audace graphique du léopard réinventée dans une palette de roses poudrés, sables chauds et soies fluides. Des pièces sensuelles pensées pour régner en toute liberté."
-          bannerImage={IMAGES.campaignPanthereRose}
-          theme="rose"
-          featuredProducts={collection01Products}
-          onExploreCollection={handleNavigate}
-          onQuickView={(p) => setQuickViewProduct(p)}
-          onToggleWishlist={handleToggleWishlist}
-          isWishlisted={isWishlisted}
-        />
-
-        {/* SECTION 06 — COLLECTION PRINCIPALE 02 (CARIBBEAN NOCTURNE) */}
-        <CollectionBlock
-          id="collection-02"
-          number="COLLECTION 02"
-          subtitle="VELOURS OBSIDIENNE & ROSE PROFOND"
-          title="CARIBBEAN NOCTURNE"
-          description="L'élégance architecturale des nuits caribéennes. Découpes nettes, velours d'ébène et accents rose profond dans un jeu de clair-obscur ultra-luxueux."
-          bannerImage={IMAGES.campaignCaribbeanNoir}
-          theme="noir"
-          featuredProducts={collection02Products}
-          onExploreCollection={handleNavigate}
-          onQuickView={(p) => setQuickViewProduct(p)}
-          onToggleWishlist={handleToggleWishlist}
-          isWishlisted={isWishlisted}
-        />
-
-        {/* SECTION 07 — PROMOTIONS & ÉCRIN PRIVILÈGE */}
-        <PromotionsSection
-          onExplorePromotions={() => setIsCartOpen(true)}
-        />
-
-        {/* SECTION 08 — NEWSLETTER CERCLE PRIVÉ */}
-        <NewsletterSection />
-      </main>
-
-      {/* SECTION 09 — FOOTER */}
-      <Footer onNavigate={handleNavigate} />
-
-      {/* INTERACTIVE DRAWERS & MODALS */}
-      <CartDrawer
-        isOpen={isCartOpen}
-        onClose={() => setIsCartOpen(false)}
-        items={cartItems}
-        onUpdateQuantity={handleUpdateQuantity}
-        onRemoveItem={handleRemoveFromCart}
-        onCheckout={() => setIsCheckoutOpen(true)}
-      />
-
-      <WishlistDrawer
-        isOpen={isWishlistOpen}
-        onClose={() => setIsWishlistOpen(false)}
-        items={wishlist}
-        onRemove={(id) => setWishlist((prev) => prev.filter((p) => p.id !== id))}
-        onQuickView={(p) => setQuickViewProduct(p)}
-      />
-
-      <QuickViewModal
-        product={quickViewProduct}
-        onClose={() => setQuickViewProduct(null)}
-        onAddToCart={handleAddToCart}
-        onToggleWishlist={handleToggleWishlist}
-        isWishlisted={quickViewProduct ? isWishlisted(quickViewProduct.id) : false}
-      />
-
-      <SearchModal
-        isOpen={isSearchOpen}
-        onClose={() => setIsSearchOpen(false)}
-        products={PRODUCTS}
-        onSelectProduct={(p) => setQuickViewProduct(p)}
-      />
-
-      <CheckoutModal
-        isOpen={isCheckoutOpen}
-        onClose={() => setIsCheckoutOpen(false)}
-        items={cartItems}
-        onOrderSuccess={() => {
-          setCartItems([]);
-        }}
-      />
-    </div>
-  );
+  return <MirezaHome />;
 }
