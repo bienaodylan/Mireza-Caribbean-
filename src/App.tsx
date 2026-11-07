@@ -16,7 +16,7 @@ import { SearchModal } from './components/SearchModal';
 import { CheckoutModal } from './components/CheckoutModal';
 import { PRODUCTS, IMAGES } from './data/products';
 import { Product, CartItem } from './types/store';
-import { ShopPage, ProductPage, AccountPage } from './pages/StorePages';
+import { ShopPage, ProductPage, AccountPage, CollectionsPage, CollectionDetailPage, CategoryPage, DiscoveryPage, JournalPage, JournalArticlePage, CartPage, CheckoutPage, NotFound } from './pages/StorePages';
 
 export default function App() {
   // Cart state initialized with 1 luxury item so the bag is demonstrative and interactive immediately
@@ -125,8 +125,16 @@ export default function App() {
   const path = window.location.pathname;
   if (path === '/admin/website-editor') return <WebsiteEditor />;
   if (path === '/shop' || path === '/boutique') return <ShopPage />;
-  if (path.startsWith('/product/')) return <ProductPage id={path.split('/')[2] || ''} />;
-  if (path === '/account' || path === '/mon-compte') return <AccountPage />;
+  if (path === '/collections') return <CollectionsPage />;
+  if (path.startsWith('/collections/')) return <CollectionDetailPage slug={path.split('/')[2] || ''} />;
+  if (path.startsWith('/category/')) return <CategoryPage slug={path.split('/')[2] || ''} />;
+  if (path === '/discovery') return <DiscoveryPage />;
+  if (path === '/journal') return <JournalPage />;
+  if (path.startsWith('/journal/')) return <JournalArticlePage slug={path.split('/')[2] || ''} />;
+  if (path === '/cart' || path === '/panier') return <CartPage />;
+  if (path === '/checkout') return <CheckoutPage />;
+  if (path === '/account' || path === '/mon-compte' || path === '/login' || path === '/register') return <AccountPage />;
+  if (path !== '/') return <NotFound />;
 
   return <MirezaHome />;
 }
