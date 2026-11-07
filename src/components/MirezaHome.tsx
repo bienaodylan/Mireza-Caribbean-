@@ -18,6 +18,12 @@ export function MirezaHome() {
   const current = slides[slide];
   const changeSlide = (step: number) => setSlide((value) => (value + step + slides.length) % slides.length);
   const addProduct = (id: string) => {
+    const product = PRODUCTS.find((p) => p.id === id);
+    if (product) {
+      const cart = JSON.parse(localStorage.getItem('mireza-demo-cart') || '[]');
+      cart.push({ productId: product.id, size: product.sizes[0], color: product.colors[0]?.name || '', qty: 1 });
+      localStorage.setItem('mireza-demo-cart', JSON.stringify(cart));
+    }
     setCartCount((count) => count + 1);
     setAdded((items) => [...items, id]);
   };
