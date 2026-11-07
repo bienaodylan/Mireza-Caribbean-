@@ -69,7 +69,7 @@ export function MirezaHome() {
 
     {/* PRODUCT EDIT */}
     <section id="shop" className="px-4 md:px-8 py-14 md:py-20">
-      <div className="flex justify-between items-end mb-7 md:mb-10"><div><p className="text-[9px] tracking-[.2em] uppercase text-[#d34b91] mb-2">MIREZA essentials</p><h2 className="font-serif text-3xl md:text-5xl uppercase">Sélection MIREZA</h2></div><a href="#shop" className="hidden sm:inline text-[10px] tracking-[.13em] uppercase border-b border-black pb-1">View all ↗</a></div>
+      <div className="flex justify-end items-end mb-7 md:mb-10"><a href="#shop" className="text-[10px] tracking-[.13em] uppercase border-b border-black pb-1">View all ↗</a></div>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-0">
         {PRODUCTS.slice(0,8).map((product)=> <article key={product.id} className="group border-r border-b border-black/5 last:border-r-0">
           <div className="relative aspect-[3/4] overflow-hidden bg-[#f5f1f3]">
