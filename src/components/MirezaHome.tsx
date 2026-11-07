@@ -68,10 +68,10 @@ export function MirezaHome() {
     </section>
 
     {/* PRODUCT EDIT */}
-    <section id="shop" className="px-4 md:px-8 py-14 md:py-20">
-      <div className="flex justify-end items-end mb-7 md:mb-10"><a href="#shop" className="text-[10px] tracking-[.13em] uppercase border-b border-black pb-1">View all ↗</a></div>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-0">
-        {PRODUCTS.slice(0,8).map((product)=> <article key={product.id} className="group border-r border-b border-black/5 last:border-r-0">
+    <section id="shop" className="px-0 py-6 md:py-8">
+      <div className="flex justify-end items-end mb-3 md:mb-4 px-3 md:px-5"><a href="#shop" className="text-[10px] tracking-[.13em] uppercase border-b border-black pb-1">View all ↗</a></div>
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-[3px] md:gap-1">
+        {PRODUCTS.slice(0,8).map((product)=> <article key={product.id} className="group">
           <div className="relative aspect-[3/4] overflow-hidden bg-[#f5f1f3]">
             <img src={product.image} alt={product.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"/>
             <button onClick={()=>addProduct(product.id)} aria-label={`Quick add ${product.name}`} className="absolute bottom-3 right-3 w-10 h-10 bg-white text-black flex items-center justify-center hover:bg-[#d34b91] hover:text-white transition"><Plus size={17}/></button>
