@@ -1,140 +1,94 @@
-import { useEffect, useRef, useState } from 'react';
-import { IMAGES, INSTAGRAM_POSTS } from '../data/products';
-import { InstagramGallery } from './InstagramGallery';
+import { useState } from 'react';
+import { Search, UserRound, ShoppingBag, ArrowLeft, ArrowRight, Plus } from 'lucide-react';
+import { IMAGES, PRODUCTS } from '../data/products';
 import { NewsletterSection } from './NewsletterSection';
 
-const looks = [
-  { name: 'CARIBBEAN SWIM', sub: '01 / SWIM', img: IMAGES.categorySwimwear },
-  { name: 'PANTHÈRE ROSE', sub: '02 / SIGNATURE', img: IMAGES.campaignPanthereRose },
-  { name: 'CARIBBEAN NOIR', sub: '03 / EDITION', img: IMAGES.campaignCaribbeanNoir },
-  { name: 'LINGERIE', sub: '04 / INTIMATES', img: IMAGES.categoryLingerie },
+const slides = [
+  { image: IMAGES.heroPanther, title: 'DISCOVER MIREZA', subtitle: 'UNE NOUVELLE VISION DE LA FÉMINITÉ', link: '#collection-01' },
+  { image: IMAGES.campaignPanthereRose, title: 'PANTHÈRE ROSE', subtitle: 'L’AUDACE EN ROSE', link: '#collection-01' },
+  { image: IMAGES.campaignCaribbeanNoir, title: 'CARIBBEAN NOIR', subtitle: 'DARK. BOLD. UNAPOLOGETIC.', link: '#collection-02' },
+  { image: IMAGES.categorySwimwear, title: 'THE NEW SHAPE', subtitle: 'DES SILHOUETTES QUI AFFIRMENT', link: '#shop' },
 ];
 
 export function MirezaHome() {
-  const [index, setIndex] = useState(0);
-  const touchStart = useRef(0);
-  const wheelLock = useRef(false);
-  const move = (step: number) => setIndex((current) => (current + step + looks.length) % looks.length);
+  const [slide, setSlide] = useState(0);
+  const [cartCount, setCartCount] = useState(0);
+  const [added, setAdded] = useState<string[]>([]);
+  const current = slides[slide];
+  const changeSlide = (step: number) => setSlide((value) => (value + step + slides.length) % slides.length);
+  const addProduct = (id: string) => {
+    setCartCount((count) => count + 1);
+    setAdded((items) => [...items, id]);
+  };
 
-  useEffect(() => {
-    const stage = document.getElementById('discovery-stage');
-    if (!stage) return;
-    let timer: number | undefined;
-    const onWheel = (event: WheelEvent) => {
-      if (Math.abs(event.deltaY) < 25 || wheelLock.current) return;
-      wheelLock.current = true;
-      move(event.deltaY > 0 ? 1 : -1);
-      window.clearTimeout(timer);
-      timer = window.setTimeout(() => { wheelLock.current = false; }, 650);
-    };
-    stage.addEventListener('wheel', onWheel, { passive: true });
-    return () => { stage.removeEventListener('wheel', onWheel); window.clearTimeout(timer); };
-  }, []);
-
-  useEffect(() => {
-    const onKey = (event: KeyboardEvent) => {
-      if (event.key === 'ArrowRight') move(1);
-      if (event.key === 'ArrowLeft') move(-1);
-    };
-    window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
-  }, []);
-
-  return <main className="bg-white text-black">
-    {/* SECTION 01 — Announcement + navigation */}
-    <div className="bg-black text-white text-[9px] sm:text-[10px] tracking-[.18em] uppercase text-center py-2">MIREZA CARIBBEAN · NEW SEASON</div>
+  return <main className="bg-white text-[#171315]">
+    {/* HEADER */}
     <header className="sticky top-0 z-50 bg-white border-b border-black/10">
-      <div className="h-[66px] px-5 md:px-10 flex items-center justify-between">
-        <nav className="hidden md:flex gap-6 text-[10px] tracking-[.13em] uppercase">
-          <a href="#discovery">Discovery</a><a href="#collection-01">Collection 01</a><a href="#collection-02">Collection 02</a>
+      <div className="h-[72px] px-4 md:px-8 grid grid-cols-3 items-center">
+        <a href="#top" className="justify-self-start font-serif text-xl md:text-2xl font-bold tracking-[.16em]">MIREZA</a>
+        <nav className="hidden md:flex justify-center gap-7 text-[10px] tracking-[.15em] uppercase">
+          <a className="border-b border-black pb-1" href="#top">Accueil</a><a className="hover:border-b border-black pb-1" href="#collections">Collections</a><a className="hover:border-b border-black pb-1" href="#shop">Boutique</a><a className="hover:border-b border-black pb-1" href="#journal">Journal</a>
         </nav>
-        <a href="#" aria-label="Mireza Caribbean home" className="absolute left-1/2 -translate-x-1/2 font-serif text-2xl tracking-[.18em]">MIREZA<span className="text-[#d56b9b]">.</span></a>
-        <div className="ml-auto flex gap-5 text-[10px] tracking-[.12em] uppercase"><a href="#collection-01">Shop</a><a href="#newsletter">Join</a></div>
+        <div className="justify-self-end flex items-center gap-3 md:gap-5">
+          <button aria-label="Search" className="hover:text-[#d34b91] transition-colors"><Search size={18}/></button>
+          <button aria-label="Account" className="hover:text-[#d34b91] transition-colors"><UserRound size={18}/></button>
+          <button aria-label="Shopping bag" className="relative hover:text-[#d34b91] transition-colors"><ShoppingBag size={18}/><span className="absolute -top-2 -right-2 bg-[#d34b91] text-white text-[8px] w-4 h-4 flex items-center justify-center rounded-full">{cartCount}</span></button>
+        </div>
       </div>
+      <nav className="md:hidden flex justify-center gap-5 pb-3 text-[9px] tracking-[.13em] uppercase"><a href="#top">Accueil</a><a href="#collections">Collections</a><a href="#shop">Boutique</a><a href="#journal">Journal</a></nav>
     </header>
 
-    {/* SECTION 02 — Interactive Discovery */}
-    <section id="discovery" aria-label="Discovery interactive" className="bg-white">
-      <div id="discovery-stage" className="relative h-[78vh] min-h-[520px] max-h-[900px] overflow-hidden touch-pan-y"
-        onTouchStart={(event) => { touchStart.current = event.touches[0].clientX; }}
-        onTouchEnd={(event) => { const delta = event.changedTouches[0].clientX - touchStart.current; if (Math.abs(delta) > 45) move(delta < 0 ? 1 : -1); }}>
-        <div className="absolute inset-0 bg-white"/>
-        <div className="absolute inset-x-0 bottom-0 h-[18%] bg-[#f5f5f5]"/>
-        {[-2,-1,1,2].map((offset) => {
-          const item = looks[(index + offset + looks.length) % looks.length];
-          return <button key={offset} onClick={() => setIndex((index + offset + looks.length) % looks.length)} aria-label={item.name}
-            className="absolute bottom-0 transition-all duration-700 ease-out"
-            style={{ left: `calc(50% + ${Math.sign(offset) * (Math.abs(offset) === 1 ? 27 : 45)}%)`, transform: `translateX(-50%) scale(${Math.abs(offset) === 1 ? .65 : .43})`, transformOrigin:'bottom center', width:'36%',height:'88%',opacity:Math.abs(offset)===1?.48:.2,zIndex:Math.abs(offset)===1?3:1 }}>
-            <img src={item.img} className="h-full w-full object-cover object-top" alt="" />
-          </button>;
-        })}
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 h-[97%] w-[70%] md:w-[38%] z-10 pointer-events-none">
-          <img key={index} src={looks[index].img} className="w-full h-full object-cover object-top animate-[mireza-enter_.65s_ease-out]" alt={looks[index].name}/>
-        </div>
-        <div className="absolute top-6 left-5 right-5 md:left-10 md:right-10 z-20 flex justify-between text-[9px] tracking-[.2em] uppercase"><span>MIREZA / DISCOVERY</span><span>{looks[index].sub}</span></div>
-        <div className="absolute left-5 md:left-10 bottom-8 z-20"><h1 className="font-serif text-2xl md:text-4xl uppercase">{looks[index].name}</h1><a href="#collection-01" className="inline-block mt-3 text-[10px] uppercase tracking-widest border-b border-black pb-1">Discover ↗</a></div>
-        <button onClick={() => move(-1)} className="absolute left-4 md:left-10 top-1/2 z-30 bg-white border border-black/20 w-11 h-11 md:w-14 md:h-14" aria-label="Previous look">←</button>
-        <button onClick={() => move(1)} className="absolute right-4 md:right-10 top-1/2 z-30 bg-white border border-black/20 w-11 h-11 md:w-14 md:h-14" aria-label="Next look">→</button>
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-30 flex gap-3 items-center text-[9px] tracking-widest"><span>0{index+1}</span><div className="w-20 h-px bg-black/20"><div className="h-px bg-[#d56b9b]" style={{width:`${(index+1)*25}%`}}/></div><span>04</span></div>
+    {/* HERO / FOUR-SLIDE CAMPAIGN */}
+    <section id="top" className="relative h-[72vh] min-h-[540px] md:h-[calc(100vh-72px)] max-h-[920px] overflow-hidden bg-[#e7c5d3] text-white">
+      {slides.map((item, i) => <img key={item.title} src={item.image} alt={item.title} className={`absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-700 ${i===slide?'opacity-100':'opacity-0'}`} />)}
+      <div className="absolute inset-0 bg-gradient-to-r from-black/45 via-black/10 to-transparent"/>
+      <div className="absolute left-6 md:left-14 top-1/2 -translate-y-1/2 max-w-2xl">
+        <p className="text-[10px] md:text-xs tracking-[.25em] mb-4">{current.subtitle}</p>
+        <h1 className="font-serif font-bold uppercase tracking-[.06em] text-4xl sm:text-6xl md:text-8xl leading-[.95]">{current.title}</h1>
+        <a href={current.link} className="inline-flex items-center gap-4 mt-7 bg-[#171315] text-white rounded-full px-7 py-4 text-[10px] tracking-[.15em] uppercase hover:bg-[#d34b91] transition-colors">Explorer la collection <ArrowRight size={15}/></a>
       </div>
+      <button onClick={()=>changeSlide(-1)} aria-label="Previous slide" className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 border border-white/60 w-10 h-10 flex items-center justify-center hover:bg-white hover:text-black transition"><ArrowLeft size={16}/></button>
+      <button onClick={()=>changeSlide(1)} aria-label="Next slide" className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 border border-white/60 w-10 h-10 flex items-center justify-center hover:bg-white hover:text-black transition"><ArrowRight size={16}/></button>
+      <div className="absolute bottom-7 left-6 md:left-14 flex items-center gap-4 text-[10px] tracking-widest"><span>0{slide+1} / 0{slides.length}</span><div className="w-24 md:w-36 h-px bg-white/40"><div className="h-px bg-white transition-all duration-500" style={{width:`${(slide+1)/slides.length*100}%`}}/></div></div>
+      <div className="absolute bottom-6 right-5 md:right-10 flex gap-2">{slides.map((item,i)=><button key={item.title} onClick={()=>setSlide(i)} aria-label={`Show slide ${i+1}`} className={`w-12 h-14 md:w-16 md:h-20 border-2 ${i===slide?'border-white':'border-white/30'} overflow-hidden transition`}><img src={item.image} alt="" className="w-full h-full object-cover"/></button>)}</div>
     </section>
 
-    {/* SECTION 03 — Instagram image marquee */}
-    <InstagramGallery />
-
-    {/* SECTION 04 — Main collection world / full campaign image */}
-    <section id="collections-world" className="relative min-h-[68vh] md:min-h-[88vh] overflow-hidden bg-white">
-      <img src={IMAGES.heroPanther} alt="Mireza Caribbean — campaign" className="absolute inset-0 w-full h-full object-cover object-center"/>
-      <div className="absolute inset-0 bg-black/10"/>
-      <div className="absolute bottom-8 left-6 md:bottom-14 md:left-14 text-white">
-        <p className="text-[9px] md:text-[10px] tracking-[.22em] uppercase mb-2">MIREZA CARIBBEAN</p>
-        <h2 className="font-serif text-4xl md:text-7xl">The Collection</h2>
-        <a href="#collection-01" className="inline-block mt-4 border border-white px-5 py-3 text-[10px] tracking-[.15em] uppercase">Explore ↗</a>
-      </div>
-    </section>
-
-    {/* SECTION 05 — Collection 01 campaign block */}
-    <section id="collection-01" className="relative min-h-[68vh] md:min-h-[82vh] overflow-hidden bg-white">
-      <img src={IMAGES.campaignPanthereRose} alt="Collection Panthère Rose" className="absolute inset-0 w-full h-full object-cover"/>
-      <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent"/>
-      <div className="absolute bottom-8 left-6 md:bottom-14 md:left-14 text-white">
-        <p className="text-[9px] tracking-[.2em] uppercase mb-2">Collection 01</p><h2 className="font-serif text-4xl md:text-6xl">Panthère Rose</h2>
-        <p className="mt-2 text-xs md:text-sm max-w-md">L'allure signature, entre douceur et caractère.</p>
-        <a href="#shop" className="inline-block mt-5 bg-white text-black px-6 py-3 text-[10px] tracking-[.15em] uppercase">Découvrir la collection ↗</a>
-      </div>
-    </section>
-
-    {/* SECTION 06 — Collection 02 campaign block */}
-    <section id="collection-02" className="relative min-h-[68vh] md:min-h-[82vh] overflow-hidden bg-white">
-      <img src={IMAGES.campaignCaribbeanNoir} alt="Collection Caribbean Noir" className="absolute inset-0 w-full h-full object-cover"/>
-      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"/>
-      <div className="absolute bottom-8 left-6 md:bottom-14 md:left-14 text-white">
-        <p className="text-[9px] tracking-[.2em] uppercase mb-2">Collection 02</p><h2 className="font-serif text-4xl md:text-6xl">Caribbean Noir</h2>
-        <p className="mt-2 text-xs md:text-sm max-w-md">Une expression nocturne, sculpturale et libre.</p>
-        <a href="#shop" className="inline-block mt-5 bg-white text-black px-6 py-3 text-[10px] tracking-[.15em] uppercase">Découvrir la collection ↗</a>
-      </div>
-    </section>
-
-    {/* SECTION 07 — Promotions, image-led */}
-    <section id="promotions" className="grid grid-cols-1 md:grid-cols-2">
-      <a href="#shop" className="relative min-h-[420px] md:min-h-[520px] overflow-hidden block">
-        <img src={IMAGES.categoryLingerie} alt="Offres Mireza" className="absolute inset-0 w-full h-full object-cover"/>
-        <div className="absolute inset-0 bg-black/20"/>
-        <div className="absolute bottom-7 left-6 md:bottom-10 md:left-10 text-white"><p className="text-[9px] tracking-[.2em] uppercase">Limited offer</p><h2 className="font-serif text-3xl md:text-4xl mt-2">Les offres du moment</h2><span className="inline-block mt-4 border-b border-white pb-1 text-[10px] tracking-widest uppercase">Voir les offres ↗</span></div>
+    {/* DUAL SUB-COLLECTIONS — edge-to-edge */}
+    <section id="collections" className="grid grid-cols-1 md:grid-cols-2 gap-0">
+      <a id="collection-01" href="#shop" className="group relative h-[68vh] min-h-[480px] overflow-hidden block bg-[#dba0bc]">
+        <img src={IMAGES.campaignPanthereRose} alt="Pink Leopard collection" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.035]"/>
+        <div className="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition-colors"/>
+        <div className="absolute bottom-8 left-7 md:bottom-12 md:left-12 text-white"><p className="text-[10px] tracking-[.2em] uppercase">Sub-collection 01</p><h2 className="font-serif text-4xl md:text-6xl mt-2">Pink Leopard</h2><span className="inline-flex items-center gap-2 mt-5 text-[10px] tracking-[.15em] uppercase border-b border-white pb-2">Shop the edit <ArrowRight size={13}/></span></div>
       </a>
-      <a href="#shop" className="relative min-h-[420px] md:min-h-[520px] overflow-hidden block">
-        <img src={IMAGES.categorySwimwear} alt="Nouvelle saison Mireza" className="absolute inset-0 w-full h-full object-cover"/>
-        <div className="absolute inset-0 bg-black/15"/>
-        <div className="absolute bottom-7 left-6 md:bottom-10 md:left-10 text-white"><p className="text-[9px] tracking-[.2em] uppercase">Season edit</p><h2 className="font-serif text-3xl md:text-4xl mt-2">Nouveautés</h2><span className="inline-block mt-4 border-b border-white pb-1 text-[10px] tracking-widest uppercase">Explorer ↗</span></div>
+      <a id="collection-02" href="#shop" className="group relative h-[68vh] min-h-[480px] overflow-hidden block bg-[#343238]">
+        <img src={IMAGES.campaignCaribbeanNoir} alt="Dark streetwear collection" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.035]"/>
+        <div className="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-colors"/>
+        <div className="absolute bottom-8 left-7 md:bottom-12 md:left-12 text-white"><p className="text-[10px] tracking-[.2em] uppercase">Sub-collection 02</p><h2 className="font-serif text-4xl md:text-6xl mt-2">Dark Street</h2><span className="inline-flex items-center gap-2 mt-5 text-[10px] tracking-[.15em] uppercase border-b border-white pb-2">Shop the edit <ArrowRight size={13}/></span></div>
       </a>
     </section>
 
-    {/* SECTION 08 — Newsletter */}
-    <div id="newsletter"><NewsletterSection /></div>
+    {/* PRODUCT EDIT */}
+    <section id="shop" className="px-4 md:px-8 py-14 md:py-20">
+      <div className="flex justify-between items-end mb-7 md:mb-10"><div><p className="text-[9px] tracking-[.2em] uppercase text-[#d34b91] mb-2">MIREZA essentials</p><h2 className="font-serif text-3xl md:text-5xl uppercase">Can’t Be Duped</h2></div><a href="#shop" className="hidden sm:inline text-[10px] tracking-[.13em] uppercase border-b border-black pb-1">View all ↗</a></div>
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-3 gap-y-8 md:gap-x-5">
+        {PRODUCTS.slice(0,4).map((product)=> <article key={product.id} className="group">
+          <div className="relative aspect-[3/4] overflow-hidden bg-[#f5f1f3]">
+            <img src={product.image} alt={product.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"/>
+            <button onClick={()=>addProduct(product.id)} aria-label={`Quick add ${product.name}`} className="absolute bottom-3 right-3 w-10 h-10 bg-white text-black flex items-center justify-center hover:bg-[#d34b91] hover:text-white transition"><Plus size={17}/></button>
+            {added.includes(product.id)&&<span className="absolute top-3 left-3 bg-white px-2 py-1 text-[8px] uppercase tracking-widest">Added</span>}
+          </div>
+          <div className="pt-3 flex justify-between gap-2"><div><h3 className="text-[10px] md:text-xs uppercase tracking-[.04em]">{product.name}</h3><p className="text-[10px] text-black/55 mt-1">{product.price.toLocaleString('fr-FR')} FCFA</p></div><button onClick={()=>addProduct(product.id)} className="text-[9px] uppercase tracking-widest underline underline-offset-4 self-start">Quick add</button></div>
+        </article>)}
+      </div>
+    </section>
 
-    {/* SECTION 09 — Footer */}
-    <footer className="bg-black text-white px-5 md:px-10 py-10">
-      <div className="flex flex-col md:flex-row gap-6 justify-between items-start md:items-center"><span className="font-serif text-2xl tracking-[.2em]">MIREZA CARIBBEAN</span><div className="flex flex-wrap gap-6 text-[9px] tracking-widest uppercase"><a href="#collection-01">Collection 01</a><a href="#collection-02">Collection 02</a><a href="#newsletter">Contact</a><a href="#discovery">Back to top ↑</a></div><span className="text-[9px] text-white/50">© MIREZA CARIBBEAN</span></div>
-    </footer>
+    {/* JOURNAL / IMAGE FEATURE */}
+    <section id="journal" className="relative h-[55vh] min-h-[360px] overflow-hidden">
+      <img src={IMAGES.heroPanther} alt="Mireza journal" className="absolute inset-0 w-full h-full object-cover"/>
+      <div className="absolute inset-0 bg-black/20"/>
+      <div className="absolute bottom-8 left-6 md:bottom-12 md:left-12 text-white"><p className="text-[10px] tracking-[.2em] uppercase">The Mireza journal</p><h2 className="font-serif text-4xl md:text-6xl mt-2">Style, in our own words.</h2><a href="#newsletter" className="inline-block mt-5 border-b border-white pb-2 text-[10px] tracking-widest uppercase">Read the journal ↗</a></div>
+    </section>
+    <div id="newsletter"><NewsletterSection/></div>
+    <footer className="bg-[#171315] text-white px-5 md:px-8 py-10"><div className="flex flex-col md:flex-row justify-between gap-6"><span className="font-serif text-xl tracking-[.16em]">MIREZA</span><nav className="flex flex-wrap gap-6 text-[9px] tracking-[.14em] uppercase"><a href="#collections">Collections</a><a href="#shop">Boutique</a><a href="#journal">Journal</a><a href="#newsletter">Contact</a></nav><span className="text-[9px] text-white/50">© MIREZA CARIBBEAN</span></div></footer>
   </main>;
 }
