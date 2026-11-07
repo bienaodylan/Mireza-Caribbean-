@@ -16,21 +16,14 @@ import { SearchModal } from './components/SearchModal';
 import { CheckoutModal } from './components/CheckoutModal';
 import { PRODUCTS, IMAGES } from './data/products';
 import { Product, CartItem } from './types/store';
-import { ShopPage, ProductPage, AccountPage, CollectionsPage, CollectionDetailPage, CategoryPage, DiscoveryPage, JournalPage, JournalArticlePage, CartPage, CheckoutPage, NotFound } from './pages/StorePages';
+import { ShopPage, ProductPage, AccountPage, CollectionsPage, CollectionDetailPage, CategoryPage, DiscoveryPage, JournalPage, JournalArticlePage, CartPage, CheckoutPage, InstitutionalPage, NotFound } from './pages/StorePages';
 
 export default function App() {
   // Cart state initialized with 1 luxury item so the bag is demonstrative and interactive immediately
-  const [cartItems, setCartItems] = useState<CartItem[]>([
-    {
-      product: PRODUCTS[0],
-      selectedSize: 'S',
-      selectedColor: { name: 'Rose Poudré', hex: '#E8B4B8' },
-      quantity: 1,
-    },
-  ]);
+  const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
   // Wishlist state initialized with 1 favorite
-  const [wishlist, setWishlist] = useState<Product[]>([PRODUCTS[1]]);
+  const [wishlist, setWishlist] = useState<Product[]>([]);
 
   // Modals and Drawers
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -125,6 +118,8 @@ export default function App() {
   const path = window.location.pathname;
   if (path === '/admin/website-editor') return <WebsiteEditor />;
   if (path === '/shop' || path === '/boutique') return <ShopPage />;
+  if (path.startsWith('/product/')) return <ProductPage id={path.split('/')[2] || ''} />;
+  if (path.startsWith('/pages/')) return <InstitutionalPage slug={path.split('/')[2] || ''} />;
   if (path === '/collections') return <CollectionsPage />;
   if (path.startsWith('/collections/')) return <CollectionDetailPage slug={path.split('/')[2] || ''} />;
   if (path.startsWith('/category/')) return <CategoryPage slug={path.split('/')[2] || ''} />;
