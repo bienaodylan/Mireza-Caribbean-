@@ -24,11 +24,11 @@ export function MirezaHome() {
 
   return <main className="bg-white text-[#171315]">
     {/* HEADER */}
-    <header className="sticky top-0 z-50 bg-white border-b border-black/10">
+    <header className="absolute top-0 left-0 right-0 z-50 bg-transparent border-b border-white/20 text-white">
       <div className="h-[72px] px-4 md:px-8 grid grid-cols-3 items-center">
         <a href="#top" className="justify-self-start font-serif text-xl md:text-2xl font-bold tracking-[.16em]">MIREZA</a>
         <nav className="hidden md:flex justify-center gap-7 text-[10px] tracking-[.15em] uppercase">
-          <a className="border-b border-black pb-1" href="#top">Accueil</a><a className="hover:border-b border-black pb-1" href="#collections">Collections</a><a className="hover:border-b border-black pb-1" href="#shop">Boutique</a><a className="hover:border-b border-black pb-1" href="#journal">Journal</a>
+          <a className="border-b border-white pb-1" href="#top">Accueil</a><a className="hover:border-b border-white pb-1" href="#collections">Collections</a><a className="hover:border-b border-black pb-1" href="#shop">Boutique</a><a className="hover:border-b border-black pb-1" href="#shop-the-look">Shop the Look</a>
         </nav>
         <div className="justify-self-end flex items-center gap-3 md:gap-5">
           <button aria-label="Search" className="hover:text-[#d34b91] transition-colors"><Search size={18}/></button>
@@ -36,11 +36,11 @@ export function MirezaHome() {
           <button aria-label="Shopping bag" className="relative hover:text-[#d34b91] transition-colors"><ShoppingBag size={18}/><span className="absolute -top-2 -right-2 bg-[#d34b91] text-white text-[8px] w-4 h-4 flex items-center justify-center rounded-full">{cartCount}</span></button>
         </div>
       </div>
-      <nav className="md:hidden flex justify-center gap-5 pb-3 text-[9px] tracking-[.13em] uppercase"><a href="#top">Accueil</a><a href="#collections">Collections</a><a href="#shop">Boutique</a><a href="#journal">Journal</a></nav>
+      <nav className="md:hidden flex justify-center gap-5 pb-3 text-[9px] tracking-[.13em] uppercase text-white"><a href="#top">Accueil</a><a href="#collections">Collections</a><a href="#shop">Boutique</a><a href="#journal">Journal</a></nav>
     </header>
 
     {/* HERO / FOUR-SLIDE CAMPAIGN */}
-    <section id="top" className="relative h-[72vh] min-h-[540px] md:h-[calc(100vh-72px)] max-h-[920px] overflow-hidden bg-[#e7c5d3] text-white">
+    <section id="top" className="relative h-[100vh] min-h-[600px] md:h-[100vh] max-h-[1000px] overflow-hidden bg-[#e7c5d3] text-white">
       {slides.map((item, i) => <img key={item.title} src={item.image} alt={item.title} className={`absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-700 ${i===slide?'opacity-100':'opacity-0'}`} />)}
       <div className="absolute inset-0 bg-gradient-to-r from-black/45 via-black/10 to-transparent"/>
       <div className="absolute left-6 md:left-14 top-1/2 -translate-y-1/2 max-w-2xl">
