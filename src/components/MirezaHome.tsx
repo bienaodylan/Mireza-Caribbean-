@@ -13,7 +13,7 @@ const slides = [
 
 export function MirezaHome() {
   const [slide, setSlide] = useState(0);
-  const [cartCount, setCartCount] = useState(0);
+  const [cartCount, setCartCount] = useState(() => { try { return JSON.parse(localStorage.getItem('mireza-demo-cart') || '[]').reduce((sum: number, item: { qty?: number }) => sum + (item.qty || 1), 0); } catch { return 0; } });
   const [added, setAdded] = useState<string[]>([]);
   const current = slides[slide];
   const changeSlide = (step: number) => setSlide((value) => (value + step + slides.length) % slides.length);
