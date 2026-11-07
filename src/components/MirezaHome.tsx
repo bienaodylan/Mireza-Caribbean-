@@ -28,15 +28,15 @@ export function MirezaHome() {
       <div className="h-[72px] px-4 md:px-8 grid grid-cols-3 items-center">
         <a href="#top" className="justify-self-start font-serif text-xl md:text-2xl font-bold tracking-[.16em]">MIREZA</a>
         <nav className="hidden md:flex justify-center gap-7 text-[10px] tracking-[.15em] uppercase">
-          <a className="border-b border-white pb-1" href="#top">Accueil</a><a className="hover:border-b border-white pb-1" href="#collections">Collections</a><a className="hover:border-b border-black pb-1" href="#shop">Boutique</a><a className="hover:border-b border-black pb-1" href="#shop-the-look">Shop the Look</a>
+          <a className="border-b border-white pb-1" href="#top">Accueil</a><a className="hover:border-b border-white pb-1" href="/collections">Collections</a><a className="hover:border-b border-white pb-1" href="/shop">Boutique</a><a className="hover:border-b border-white pb-1" href="/discovery">Discovery</a><a className="hover:border-b border-white pb-1" href="#shop-the-look">Shop the Look</a>
         </nav>
         <div className="justify-self-end flex items-center gap-3 md:gap-5">
-          <button aria-label="Search" className="hover:text-[#d34b91] transition-colors"><Search size={18}/></button>
-          <button aria-label="Account" className="hover:text-[#d34b91] transition-colors"><UserRound size={18}/></button>
-          <button aria-label="Shopping bag" className="relative hover:text-[#d34b91] transition-colors"><ShoppingBag size={18}/><span className="absolute -top-2 -right-2 bg-[#d34b91] text-white text-[8px] w-4 h-4 flex items-center justify-center rounded-full">{cartCount}</span></button>
+          <a href="/shop" aria-label="Search" className="hover:text-[#d34b91] transition-colors"><Search size={18}/></a>
+          <a href="/account" aria-label="Account" className="hover:text-[#d34b91] transition-colors"><UserRound size={18}/></a>
+          <a href="/cart" aria-label="Shopping bag" className="relative hover:text-[#d34b91] transition-colors"><ShoppingBag size={18}/><span className="absolute -top-2 -right-2 bg-[#d34b91] text-white text-[8px] w-4 h-4 flex items-center justify-center rounded-full">{cartCount}</span></a>
         </div>
       </div>
-      <nav className="md:hidden flex justify-center gap-5 pb-3 text-[9px] tracking-[.13em] uppercase text-white"><a href="#top">Accueil</a><a href="#collections">Collections</a><a href="#shop">Boutique</a><a href="#journal">Journal</a></nav>
+      <nav className="md:hidden flex justify-center gap-5 pb-3 text-[9px] tracking-[.13em] uppercase text-white"><a href="#top">Accueil</a><a href="/collections">Collections</a><a href="/shop">Boutique</a><a href="/discovery">Discovery</a></nav>
     </header>
 
     {/* HERO / FOUR-SLIDE CAMPAIGN */}
@@ -56,12 +56,12 @@ export function MirezaHome() {
 
     {/* DUAL SUB-COLLECTIONS — edge-to-edge */}
     <section id="collections" className="grid grid-cols-1 md:grid-cols-2 gap-0">
-      <a id="collection-01" href="#shop" className="group relative h-[68vh] min-h-[480px] overflow-hidden block bg-[#dba0bc]">
+      <a id="collection-01" href="/collections/panthere-rose" className="group relative h-[68vh] min-h-[480px] overflow-hidden block bg-[#dba0bc]">
         <img src={IMAGES.campaignPanthereRose} alt="Pink Leopard collection" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.035]"/>
         <div className="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition-colors"/>
         <div className="absolute bottom-8 left-7 md:bottom-12 md:left-12 text-white"><p className="text-[10px] tracking-[.2em] uppercase">Sub-collection 01</p><h2 className="font-serif text-4xl md:text-6xl mt-2">Pink Leopard</h2><span className="inline-flex items-center gap-2 mt-5 text-[10px] tracking-[.15em] uppercase border-b border-white pb-2">Shop the edit <ArrowRight size={13}/></span></div>
       </a>
-      <a id="collection-02" href="#shop" className="group relative h-[68vh] min-h-[480px] overflow-hidden block bg-[#343238]">
+      <a id="collection-02" href="/collections/caribbean-noir" className="group relative h-[68vh] min-h-[480px] overflow-hidden block bg-[#343238]">
         <img src={IMAGES.campaignCaribbeanNoir} alt="Dark streetwear collection" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.035]"/>
         <div className="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-colors"/>
         <div className="absolute bottom-8 left-7 md:bottom-12 md:left-12 text-white"><p className="text-[10px] tracking-[.2em] uppercase">Sub-collection 02</p><h2 className="font-serif text-4xl md:text-6xl mt-2">Dark Street</h2><span className="inline-flex items-center gap-2 mt-5 text-[10px] tracking-[.15em] uppercase border-b border-white pb-2">Shop the edit <ArrowRight size={13}/></span></div>
@@ -70,7 +70,7 @@ export function MirezaHome() {
 
     {/* PRODUCT EDIT */}
     <section id="shop" className="px-0 py-6 md:py-8">
-      <div className="flex justify-end items-end mb-3 md:mb-4 px-3 md:px-5"><a href="#shop" className="text-[10px] tracking-[.13em] uppercase border-b border-black pb-1">View all ↗</a></div>
+      <div className="flex justify-end items-end mb-3 md:mb-4 px-3 md:px-5"><a href="/shop" className="text-[10px] tracking-[.13em] uppercase border-b border-black pb-1">View all ↗</a></div>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-[3px] md:gap-1">
         {PRODUCTS.slice(0,8).map((product)=> <article key={product.id} className="group">
           <div className="relative aspect-[3/4] overflow-hidden bg-[#f5f1f3]">
