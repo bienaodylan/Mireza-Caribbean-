@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Search, UserRound, ShoppingBag, ArrowLeft, ArrowRight, Plus } from 'lucide-react';
 import { IMAGES, PRODUCTS } from '../data/products';
 import { NewsletterSection } from './NewsletterSection';
+import { ShopTheLook } from './ShopTheLook';
 
 const slides = [
   { image: IMAGES.heroPanther, title: 'DISCOVER MIREZA', subtitle: 'UNE NOUVELLE VISION DE LA FÉMINITÉ', link: '#collection-01' },
@@ -82,12 +83,7 @@ export function MirezaHome() {
       </div>
     </section>
 
-    {/* JOURNAL / IMAGE FEATURE */}
-    <section id="journal" className="relative h-[55vh] min-h-[360px] overflow-hidden">
-      <img src={IMAGES.heroPanther} alt="Mireza journal" className="absolute inset-0 w-full h-full object-cover"/>
-      <div className="absolute inset-0 bg-black/20"/>
-      <div className="absolute bottom-8 left-6 md:bottom-12 md:left-12 text-white"><p className="text-[10px] tracking-[.2em] uppercase">The Mireza journal</p><h2 className="font-serif text-4xl md:text-6xl mt-2">Style, in our own words.</h2><a href="#newsletter" className="inline-block mt-5 border-b border-white pb-2 text-[10px] tracking-widest uppercase">Read the journal ↗</a></div>
-    </section>
+    <ShopTheLook/>
     <div id="newsletter"><NewsletterSection/></div>
     <footer className="bg-[#171315] text-white px-5 md:px-8 py-10"><div className="flex flex-col md:flex-row justify-between gap-6"><span className="font-serif text-xl tracking-[.16em]">MIREZA</span><nav className="flex flex-wrap gap-6 text-[9px] tracking-[.14em] uppercase"><a href="#collections">Collections</a><a href="#shop">Boutique</a><a href="#journal">Journal</a><a href="#newsletter">Contact</a></nav><span className="text-[9px] text-white/50">© MIREZA CARIBBEAN</span></div></footer>
   </main>;
