@@ -16,7 +16,7 @@ import { SearchModal } from './components/SearchModal';
 import { CheckoutModal } from './components/CheckoutModal';
 import { PRODUCTS, IMAGES } from './data/products';
 import { Product, CartItem } from './types/store';
-import { ShopPage, ProductPage, AccountPage, CollectionsPage, CollectionDetailPage, CategoryPage, DiscoveryPage, JournalPage, JournalArticlePage, CartPage, CheckoutPage, InstitutionalPage, StoreShell, NotFound } from './pages/StorePages';
+import { ShopPage, ProductPage, AccountPage, CollectionsPage, CollectionDetailPage, CategoryPage, DiscoveryPage, JournalPage, JournalArticlePage, CartPage, CheckoutPage, InstitutionalPage, StoreShell, AdminDashboard, NotFound } from './pages/StorePages';
 
 export default function App() {
   // Cart state initialized with 1 luxury item so the bag is demonstrative and interactive immediately
@@ -116,6 +116,7 @@ export default function App() {
   );
 
   const path = window.location.pathname;
+  if (path === '/admin') return <AdminDashboard />;
   if (path === '/admin/website-editor') return <WebsiteEditor />;
   if (path === '/shop' || path === '/boutique') return <StoreShell><ShopPage /></StoreShell>;
   if (path.startsWith('/product/')) return <StoreShell><ProductPage id={path.split('/')[2] || ''} /></StoreShell>;
