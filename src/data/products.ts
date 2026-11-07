@@ -103,7 +103,6 @@ export const PRODUCTS: Product[] = [
     ],
     isNew: true,
   },
-  ,
   {
     id: 'mz-007',
     name: 'Top Sculptant Caribbean Noir',
