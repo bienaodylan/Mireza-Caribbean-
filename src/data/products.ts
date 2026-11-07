@@ -103,6 +103,31 @@ export const PRODUCTS: Product[] = [
     ],
     isNew: true,
   },
+  ,
+  {
+    id: 'mz-007',
+    name: 'Top Sculptant Caribbean Noir',
+    category: 'lingerie',
+    collection: 'caribbean-noir',
+    price: 32000,
+    image: IMAGES.campaignCaribbeanNoir,
+    description: 'Top sculptant noir aux lignes nettes et maintien confortable.',
+    sizes: ['XS', 'S', 'M', 'L', 'XL'],
+    colors: [{ name: 'Noir', hex: '#111111' }],
+    isNew: true,
+  },
+  {
+    id: 'mz-008',
+    name: 'Short Lounge Satin Panthère',
+    category: 'homewear',
+    collection: 'panthere-rose',
+    price: 27000,
+    image: IMAGES.campaignPanthereRose,
+    description: 'Short lounge en satin doux, imprimé Panthère Rose.',
+    sizes: ['XS', 'S', 'M', 'L'],
+    colors: [{ name: 'Panthère Rose', hex: '#D48C96' }],
+    isBestseller: true,
+  },
 ];
 
 export const CATEGORIES = [
