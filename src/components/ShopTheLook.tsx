@@ -13,7 +13,7 @@ export function ShopTheLook(){
  const [active,setActive]=useState(0),[paused,setPaused]=useState(false),[open,setOpen]=useState(false),[cart,setCart]=useState<string[]>([]);
  useEffect(()=>{if(paused||open)return;const timer=window.setInterval(()=>setActive(v=>(v+1)%looks.length),5500);return()=>window.clearInterval(timer)},[paused,open]);
  const look=looks[active];
- const add=(id:string)=>setCart(v=>v.concat(id));
+ const add=(id:string)=>{const p=PRODUCTS.find(x=>x.id===id);if(p){const demo=JSON.parse(localStorage.getItem('mireza-demo-cart')||'[]');demo.push({productId:p.id,size:p.sizes[0],color:p.colors[0]?.name||'',qty:1});localStorage.setItem('mireza-demo-cart',JSON.stringify(demo));}setCart(v=>v.concat(id));};
  return <section id="shop-the-look" className="w-full overflow-hidden bg-[#e9c6d7] text-white" onMouseEnter={()=>setPaused(true)} onMouseLeave={()=>setPaused(false)} onFocus={()=>setPaused(true)}>
   <div className="relative h-[620px] sm:h-[740px] lg:h-[min(88vh,900px)]">
    {looks.map((x,i)=><img key={x.title} src={x.image} alt={x.title} loading={i===0?'eager':'lazy'} className={'absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 '+(i===active?'opacity-100':'opacity-0')}/>)}
