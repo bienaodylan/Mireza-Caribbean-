@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Navigation } from './components/Navigation';
+import { WebsiteEditor } from './components/WebsiteEditor';
 import { HeroSection } from './components/HeroSection';
 import { InstagramGallery } from './components/InstagramGallery';
 import { CollectionsPresentation } from './components/CollectionsPresentation';
@@ -118,6 +119,8 @@ export default function App() {
   const collection02Products = PRODUCTS.filter(
     (p) => p.collection === 'caribbean-noir' || p.category === 'swimwear' || p.id === 'mz-004'
   );
+
+  if (window.location.pathname === '/admin/website-editor') return <WebsiteEditor />;
 
   return (
     <div className="min-h-screen bg-[#FAF7F5] text-[#121212] flex flex-col font-sans selection:bg-[#E8B4B8] selection:text-black">
