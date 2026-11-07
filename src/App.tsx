@@ -16,6 +16,7 @@ import { SearchModal } from './components/SearchModal';
 import { CheckoutModal } from './components/CheckoutModal';
 import { PRODUCTS, IMAGES } from './data/products';
 import { Product, CartItem } from './types/store';
+import { ShopPage, ProductPage, AccountPage } from './pages/StorePages';
 
 export default function App() {
   // Cart state initialized with 1 luxury item so the bag is demonstrative and interactive immediately
@@ -121,7 +122,11 @@ export default function App() {
     (p) => p.collection === 'caribbean-noir' || p.category === 'swimwear' || p.id === 'mz-004'
   );
 
-  if (window.location.pathname === '/admin/website-editor') return <WebsiteEditor />;
+  const path = window.location.pathname;
+  if (path === '/admin/website-editor') return <WebsiteEditor />;
+  if (path === '/shop' || path === '/boutique') return <ShopPage />;
+  if (path.startsWith('/product/')) return <ProductPage id={path.split('/')[2] || ''} />;
+  if (path === '/account' || path === '/mon-compte') return <AccountPage />;
 
   return <MirezaHome />;
 }
