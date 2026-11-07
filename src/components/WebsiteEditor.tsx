@@ -28,7 +28,7 @@ export function WebsiteEditor() {
   return <div className="min-h-screen bg-[#f5f3f1] text-[#181614]">
     <header className="flex flex-wrap items-center justify-between gap-3 border-b bg-white px-5 py-4">
       <div><p className="text-xs uppercase tracking-[.2em] text-neutral-500">MIREZA · Administration</p><h1 className="text-xl font-semibold">Website editor</h1></div>
-      <div className="flex items-center gap-2"><span className="text-xs text-neutral-500">{status}</span><button onClick={save} className="flex items-center gap-2 border px-4 py-2 text-sm"><Save size={15}/> Enregistrer</button><button onClick={publish} className="flex items-center gap-2 bg-black px-4 py-2 text-sm text-white"><Send size={15}/> Publier</button></div>
+      <div className="flex items-center gap-3"><a href="/admin" className="text-xs underline">← Studio</a><a href="/" className="text-xs underline">Voir le site ↗</a><span className="text-xs text-neutral-500">{status}</span><button onClick={save} className="flex items-center gap-2 border px-4 py-2 text-sm"><Save size={15}/> Enregistrer</button><button onClick={publish} className="flex items-center gap-2 bg-black px-4 py-2 text-sm text-white"><Send size={15}/> Publier</button></div>
     </header>
     <div className="grid min-h-[calc(100vh-76px)] grid-cols-1 lg:grid-cols-[260px_minmax(0,1fr)_300px]">
       <aside className="border-r bg-white p-4">
