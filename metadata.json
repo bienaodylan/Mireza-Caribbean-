@@ -1,0 +1,6 @@
+{
+  "name": "Mireza Caribbean",
+  "description": "Boutique en ligne officielle de MIREZA CARIBBEAN — Lingerie, Swimwear, Corsets et Streetwear de luxe.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

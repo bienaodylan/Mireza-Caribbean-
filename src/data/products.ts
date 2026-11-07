@@ -1,0 +1,176 @@
+import { Product } from '../types/store';
+
+// Image paths from phase 1 generation
+export const IMAGES = {
+  heroPanther: '/src/assets/images/hero_mireza_panther_1794068864646.jpg',
+  campaignPanthereRose: '/src/assets/images/campaign_panthere_rose_1794068864837.jpg',
+  campaignCaribbeanNoir: '/src/assets/images/campaign_caribbean_noir_1794068866757.jpg',
+  categoryLingerie: '/src/assets/images/category_lingerie_corset_1794068867069.jpg',
+  categorySwimwear: '/src/assets/images/category_swimwear_bikini_1794068867910.jpg',
+};
+
+export const PRODUCTS: Product[] = [
+  {
+    id: 'mz-001',
+    name: 'Bustier Sculptant Satin Rose & Dentelle',
+    category: 'corsets',
+    collection: 'signature',
+    price: 48000,
+    originalPrice: 55000,
+    image: IMAGES.categoryLingerie,
+    description: 'Corset d’inspiration haute couture en satin rose poudré et dentelle délicate noire. Baleines flexibles sculptantes et découpe architecturale.',
+    sizes: ['XS', 'S', 'M', 'L', 'XL'],
+    colors: [
+      { name: 'Rose Poudré', hex: '#E8B4B8' },
+      { name: 'Noir Obsidienne', hex: '#111111' },
+      { name: 'Rose Profond', hex: '#9A3B5A' },
+    ],
+    isNew: true,
+    isBestseller: true,
+  },
+  {
+    id: 'mz-002',
+    name: 'Maillot 1-Pièce Découpe Architecturale Rose',
+    category: 'swimwear',
+    collection: 'signature',
+    price: 36000,
+    image: IMAGES.categorySwimwear,
+    description: 'Swimwear asymétrique à découpes graphiques. Tissu gainant anti-UV avec finitions couture soyeuses.',
+    sizes: ['XS', 'S', 'M', 'L'],
+    colors: [
+      { name: 'Rose Pastel', hex: '#F4DCD6' },
+      { name: 'Noir Mat', hex: '#1C1C1C' },
+    ],
+    isNew: true,
+  },
+  {
+    id: 'mz-003',
+    name: 'Kimono Long Soie Léopard & Liseré Rose',
+    category: 'homewear',
+    collection: 'panthere-rose',
+    price: 65000,
+    image: IMAGES.campaignPanthereRose,
+    description: 'Kimono fluide en satin de soie orné du motif léopard exclusif MIREZA et finitions col rose poudré. Ceinture coordonnée.',
+    sizes: ['S', 'M', 'L'],
+    colors: [
+      { name: 'Léopard Rose Poudré', hex: '#D48C96' },
+      { name: 'Noir Soie', hex: '#181818' },
+    ],
+    isBestseller: true,
+  },
+  {
+    id: 'mz-004',
+    name: 'Robe Fourreau Bustier Caribbean Nocturne',
+    category: 'corsets',
+    collection: 'caribbean-noir',
+    price: 85000,
+    originalPrice: 95000,
+    image: IMAGES.campaignCaribbeanNoir,
+    description: 'Robe sculptante en velours noir d’ébène et bustier en satin rose profond structuré. Lignes géométriques pures pour une silhouette majestueuse.',
+    sizes: ['XS', 'S', 'M', 'L'],
+    colors: [
+      { name: 'Nocturne Noir & Rose Profond', hex: '#191519' },
+    ],
+    isLimited: true,
+  },
+  {
+    id: 'mz-005',
+    name: 'Ensemble Lingerie Panthère Signature',
+    category: 'lingerie',
+    collection: 'signature',
+    price: 42000,
+    image: IMAGES.heroPanther,
+    description: 'Parure corsetée haute précision avec finitions dentelle noire et tulle blush. Conçue pour une allure audacieuse et royale.',
+    sizes: ['XS', 'S', 'M', 'L', 'XL'],
+    colors: [
+      { name: 'Blush & Noir', hex: '#E8B4B8' },
+      { name: 'Noir Intégral', hex: '#0D0D0D' },
+    ],
+    isBestseller: true,
+  },
+  {
+    id: 'mz-006',
+    name: 'Bikini Triangle Minimalist Rose Blush',
+    category: 'swimwear',
+    collection: 'panthere-rose',
+    price: 29000,
+    image: IMAGES.categorySwimwear,
+    description: 'Haut de bikini triangle ajustable et bas échancré taille haute. Finitions bords francs géométriques.',
+    sizes: ['XS', 'S', 'M', 'L'],
+    colors: [
+      { name: 'Rose Blush', hex: '#EBB4BC' },
+      { name: 'Terre Brune', hex: '#4A3528' },
+    ],
+    isNew: true,
+  },
+];
+
+export const CATEGORIES = [
+  {
+    id: 'lingerie',
+    name: 'Lingerie & Dentelle',
+    tag: 'Haute Précision',
+    image: IMAGES.categoryLingerie,
+    link: '#boutique?cat=lingerie',
+  },
+  {
+    id: 'swimwear',
+    name: 'Swimwear Architectural',
+    tag: 'Resort & Poolside',
+    image: IMAGES.categorySwimwear,
+    link: '#boutique?cat=swimwear',
+  },
+  {
+    id: 'homewear',
+    name: 'Robes & Kimonos Soie',
+    tag: 'Édition Léopard',
+    image: IMAGES.campaignPanthereRose,
+    link: '#boutique?cat=homewear',
+  },
+  {
+    id: 'corsets',
+    name: 'Bustiers & Silhouettes Nocturnes',
+    tag: 'Élégance Pure',
+    image: IMAGES.campaignCaribbeanNoir,
+    link: '#boutique?cat=corsets',
+  },
+];
+
+export const INSTAGRAM_POSTS = [
+  {
+    id: 'ig-1',
+    image: IMAGES.heroPanther,
+    tag: '@mireza.caribbean',
+    caption: 'L’instinct félin rencontre l’élégance caribéenne.',
+  },
+  {
+    id: 'ig-2',
+    image: IMAGES.categoryLingerie,
+    tag: '#MirezaWoman',
+    caption: 'Bustier satin rose poudré. Précision architecturale.',
+  },
+  {
+    id: 'ig-3',
+    image: IMAGES.campaignPanthereRose,
+    tag: '#PanthereRose',
+    caption: 'La soie au service de l’audace. Collection 01 disponible.',
+  },
+  {
+    id: 'ig-4',
+    image: IMAGES.categorySwimwear,
+    tag: '#MirezaResort',
+    caption: 'Lignes épurées, découpe asymétrique rose pastel.',
+  },
+  {
+    id: 'ig-5',
+    image: IMAGES.campaignCaribbeanNoir,
+    tag: '#CaribbeanNocturne',
+    caption: 'Collection 02 : le noir absolu rehaussé de velours rose profond.',
+  },
+  {
+    id: 'ig-6',
+    image: IMAGES.categoryLingerie,
+    tag: '@mireza.caribbean',
+    caption: 'Détails de coutures et dentelle fine façonnée main.',
+  },
+];
