@@ -24,7 +24,7 @@ export function MirezaHome() {
 
   return <main className="bg-white text-[#171315]">
     {/* HEADER */}
-    <header className="absolute top-0 left-0 right-0 z-50 bg-transparent border-b border-white/20 text-white">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-transparent border-0 text-white">
       <div className="h-[72px] px-4 md:px-8 grid grid-cols-3 items-center">
         <a href="#top" className="justify-self-start font-serif text-xl md:text-2xl font-bold tracking-[.16em]">MIREZA</a>
         <nav className="hidden md:flex justify-center gap-7 text-[10px] tracking-[.15em] uppercase">
