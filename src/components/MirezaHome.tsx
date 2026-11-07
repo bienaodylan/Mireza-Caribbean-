@@ -69,15 +69,15 @@ export function MirezaHome() {
 
     {/* PRODUCT EDIT */}
     <section id="shop" className="px-4 md:px-8 py-14 md:py-20">
-      <div className="flex justify-between items-end mb-7 md:mb-10"><div><p className="text-[9px] tracking-[.2em] uppercase text-[#d34b91] mb-2">MIREZA essentials</p><h2 className="font-serif text-3xl md:text-5xl uppercase">Can’t Be Duped</h2></div><a href="#shop" className="hidden sm:inline text-[10px] tracking-[.13em] uppercase border-b border-black pb-1">View all ↗</a></div>
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-3 gap-y-8 md:gap-x-5">
-        {PRODUCTS.slice(0,4).map((product)=> <article key={product.id} className="group">
+      <div className="flex justify-between items-end mb-7 md:mb-10"><div><p className="text-[9px] tracking-[.2em] uppercase text-[#d34b91] mb-2">MIREZA essentials</p><h2 className="font-serif text-3xl md:text-5xl uppercase">Sélection MIREZA</h2></div><a href="#shop" className="hidden sm:inline text-[10px] tracking-[.13em] uppercase border-b border-black pb-1">View all ↗</a></div>
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-0">
+        {PRODUCTS.slice(0,8).map((product)=> <article key={product.id} className="group border-r border-b border-black/5 last:border-r-0">
           <div className="relative aspect-[3/4] overflow-hidden bg-[#f5f1f3]">
             <img src={product.image} alt={product.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"/>
             <button onClick={()=>addProduct(product.id)} aria-label={`Quick add ${product.name}`} className="absolute bottom-3 right-3 w-10 h-10 bg-white text-black flex items-center justify-center hover:bg-[#d34b91] hover:text-white transition"><Plus size={17}/></button>
             {added.includes(product.id)&&<span className="absolute top-3 left-3 bg-white px-2 py-1 text-[8px] uppercase tracking-widest">Added</span>}
           </div>
-          <div className="pt-3 flex justify-between gap-2"><div><h3 className="text-[10px] md:text-xs uppercase tracking-[.04em]">{product.name}</h3><p className="text-[10px] text-black/55 mt-1">{product.price.toLocaleString('fr-FR')} FCFA</p></div><button onClick={()=>addProduct(product.id)} className="text-[9px] uppercase tracking-widest underline underline-offset-4 self-start">Quick add</button></div>
+          <div className="pt-3 px-3 pb-5 flex justify-between gap-2"><div><h3 className="text-[10px] md:text-xs uppercase tracking-[.04em]">{product.name}</h3><p className="text-[10px] text-black/55 mt-1">{product.price.toLocaleString('fr-FR')} FCFA</p></div><button onClick={()=>addProduct(product.id)} className="text-[9px] uppercase tracking-widest underline underline-offset-4 self-start">Quick add</button></div>
         </article>)}
       </div>
     </section>
