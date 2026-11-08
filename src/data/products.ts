@@ -127,6 +127,26 @@ export const PRODUCTS: Product[] = [
     colors: [{ name: 'Panthère Rose', hex: '#D48C96' }],
     isBestseller: true,
   },
+  {
+    id: 'mz-009', name: 'Body Seconde Peau Ébène', category: 'lingerie', collection: 'signature', price: 35000,
+    image: IMAGES.categoryLingerie, description: 'Body seconde peau à la ligne épurée, pensé pour accompagner la silhouette avec douceur.',
+    sizes: ['XS','S','M','L','XL'], colors: [{name:'Ébène',hex:'#171315'},{name:'Nude Rosé',hex:'#D8A9A2'}], isNew: true,
+  },
+  {
+    id: 'mz-010', name: 'Paréo Drapé Soleil des Îles', category: 'swimwear', collection: 'panthere-rose', price: 24000,
+    image: IMAGES.categorySwimwear, description: 'Paréo léger aux drapés fluides, compagnon des journées au soleil.',
+    sizes: ['S','M','L'], colors: [{name:'Rose Corail',hex:'#D98791'},{name:'Noir',hex:'#171315'}],
+  },
+  {
+    id: 'mz-011', name: 'Nuisette Satin Minuit', category: 'homewear', collection: 'caribbean-noir', price: 39000,
+    image: IMAGES.campaignCaribbeanNoir, description: 'Nuisette satinée aux lignes minimalistes et au tombé délicat.',
+    sizes: ['XS','S','M','L'], colors: [{name:'Noir Minuit',hex:'#171315'},{name:'Rose Poudré',hex:'#DDAEBE'}], isBestseller: true,
+  },
+  {
+    id: 'mz-012', name: 'Pochette MIREZA Signature', category: 'accessoires', collection: 'signature', price: 18000,
+    image: IMAGES.campaignPanthereRose, description: 'Pochette signature pour garder les essentiels à portée de main.',
+    sizes: ['TU'], colors: [{name:'Rose Signature',hex:'#D48C96'},{name:'Noir',hex:'#171315'}], isNew: true,
+  },
 ];
 
 export const CATEGORIES = [
