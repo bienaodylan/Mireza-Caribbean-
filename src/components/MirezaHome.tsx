@@ -30,11 +30,11 @@ export function MirezaHome() {
 
   return <main className="bg-white text-[#171315]">
     {/* HEADER */}
-    <header className="fixed top-0 left-0 right-0 z-50 bg-transparent border-0 text-white">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-[#FAF7F5] border-0 text-[#171315] shadow-sm">
       <div className="h-[72px] px-4 md:px-8 grid grid-cols-3 items-center">
         <a href="#top" className="justify-self-start font-serif text-xl md:text-2xl font-bold tracking-[.16em]">MIREZA</a>
         <nav className="hidden md:flex justify-center gap-7 text-[10px] tracking-[.15em] uppercase">
-          <a className="border-b border-white pb-1" href="#top">Accueil</a><a className="hover:border-b border-white pb-1" href="/collections">Collections</a><a className="hover:border-b border-white pb-1" href="/shop">Boutique</a><a className="hover:border-b border-white pb-1" href="/discovery">Discovery</a><a className="hover:border-b border-white pb-1" href="#shop-the-look">Shop the Look</a>
+          <a className="border-b border-white pb-1" href="#top">Accueil</a><a className="hover:border-b border-black pb-1" href="/collections">Collections</a><a className="hover:border-b border-white pb-1" href="/shop">Boutique</a><a className="hover:border-b border-white pb-1" href="/discovery">Discovery</a><a className="hover:border-b border-white pb-1" href="#shop-the-look">Shop the Look</a>
         </nav>
         <div className="justify-self-end flex items-center gap-3 md:gap-5">
           <a href="/shop" aria-label="Search" className="hover:text-[#d34b91] transition-colors"><Search size={18}/></a>
@@ -42,7 +42,7 @@ export function MirezaHome() {
           <a href="/cart" aria-label="Shopping bag" className="relative hover:text-[#d34b91] transition-colors"><ShoppingBag size={18}/><span className="absolute -top-2 -right-2 bg-[#d34b91] text-white text-[8px] w-4 h-4 flex items-center justify-center rounded-full">{cartCount}</span></a>
         </div>
       </div>
-      <nav className="md:hidden flex justify-center gap-5 pb-3 text-[9px] tracking-[.13em] uppercase text-white"><a href="#top">Accueil</a><a href="/collections">Collections</a><a href="/shop">Boutique</a><a href="/discovery">Discovery</a></nav>
+      <nav className="md:hidden flex justify-center gap-5 pb-3 text-[9px] tracking-[.13em] uppercase text-black"><a href="#top">Accueil</a><a href="/collections">Collections</a><a href="/shop">Boutique</a><a href="/discovery">Discovery</a></nav>
     </header>
 
     {/* HERO / FOUR-SLIDE CAMPAIGN */}
@@ -90,12 +90,10 @@ export function MirezaHome() {
     </section>
 
 
-    {/* CATEGORY EDIT — direct routes to filtered catalog */}
-    <section className="py-12 md:py-16 bg-[#f4e3eb]"><div className="px-5 md:px-10 flex justify-between items-end mb-6"><div><p className="text-[10px] uppercase tracking-[.22em] text-[#b43c79]">Explorer par univers</p><h2 className="font-serif text-3xl md:text-5xl mt-2">Les catégories</h2></div><a href="/shop" className="text-[10px] uppercase tracking-widest border-b border-black pb-1">Tout voir ↗</a></div><div className="grid grid-cols-2 md:grid-cols-4 gap-[3px]">{[{name:'Lingerie',slug:'lingerie',image:IMAGES.categoryLingerie},{name:'Swimwear',slug:'swimwear',image:IMAGES.categorySwimwear},{name:'Clothing & Lounge',slug:'homewear',image:IMAGES.campaignPanthereRose},{name:'Accessories',slug:'accessoires',image:IMAGES.campaignCaribbeanNoir}].map(cat=><a key={cat.slug} href={'/category/'+cat.slug} className="group relative aspect-[4/5] overflow-hidden"><img src={cat.image} alt={cat.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"/><div className="absolute inset-0 bg-black/15"/><h3 className="absolute bottom-5 left-4 md:bottom-8 md:left-7 text-white font-serif text-2xl md:text-4xl">{cat.name}</h3></a>)}</div></section>
-    {/* DISCOVERY SIGNATURE */}
-    <section className="relative bg-[#d9a8c0] text-white grid md:grid-cols-2 min-h-[460px]"><div className="p-8 md:p-14 flex flex-col justify-center"><p className="text-[10px] uppercase tracking-[.25em]">MIREZA · Interactive styling</p><h2 className="font-serif text-5xl md:text-7xl mt-4">Discover<br/>the silhouette.</h2><p className="text-sm mt-5 max-w-sm leading-6">Explore les silhouettes, découvre les pièces qui composent chaque look et shoppe directement le mannequin.</p><a href="/discovery" className="mt-7 border border-white px-6 py-4 text-[10px] uppercase tracking-widest w-fit">Entrer dans Discovery ↗</a></div><a href="/discovery" className="relative min-h-[400px] overflow-hidden"><img src={IMAGES.heroPanther} alt="MIREZA Discovery" className="absolute inset-0 w-full h-full object-cover"/><span className="absolute bottom-5 right-5 border border-white px-4 py-3 text-[10px] uppercase tracking-widest">Explore experience →</span></a></section>
-    {/* JOURNAL */}
-    <section id="journal" className="px-5 md:px-10 py-12 md:py-16 bg-[#f8edf2]"><div className="flex justify-between items-end mb-6"><div><p className="text-[10px] uppercase tracking-[.22em] text-[#b43c79]">Stories & inspirations</p><h2 className="font-serif text-3xl md:text-5xl mt-2">Journal MIREZA</h2></div><a href="/journal" className="text-[10px] uppercase tracking-widest border-b border-black pb-1">Lire le journal ↗</a></div><div className="grid md:grid-cols-2 gap-1">{[{title:'L’instinct félin',image:IMAGES.campaignPanthereRose,slug:'instinct-felin'},{title:'Caribbean Noir — une attitude',image:IMAGES.campaignCaribbeanNoir,slug:'caribbean-noir'}].map(post=><a href={'/journal/'+post.slug} key={post.slug} className="group relative h-[45vh] min-h-[300px] overflow-hidden"><img src={post.image} alt={post.title} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"/><div className="absolute inset-0 bg-black/20"/><h3 className="absolute bottom-6 left-6 text-white font-serif text-3xl md:text-5xl">{post.title}</h3></a>)}</div></section>
+    {/* QUICK CATEGORY PILLS — no section heading */}
+    <nav aria-label="Catégories" className="flex flex-wrap justify-center gap-2 md:gap-3 px-4 py-8 md:py-10 bg-white">
+      {[{name:'Lingerie',slug:'lingerie'},{name:'Swimwear',slug:'swimwear'},{name:'Loungewear',slug:'homewear'},{name:'Accessoires',slug:'accessoires'},{name:'Toutes les pièces',slug:'shop'}].map(cat=><a key={cat.slug} href={cat.slug==='shop'?'/shop':'/category/'+cat.slug} className="rounded-full border border-black/20 px-5 py-3 text-[9px] md:text-[10px] uppercase tracking-[.16em] hover:bg-[#171315] hover:text-white transition-colors">{cat.name}</a>)}
+    </nav>
     <ShopTheLook/>
     <div id="newsletter"><NewsletterSection/></div>
     <footer className="bg-[#171315] text-white px-5 md:px-8 py-10"><div className="flex flex-col md:flex-row justify-between gap-6"><span className="font-serif text-xl tracking-[.16em]">MIREZA</span><nav className="flex flex-wrap gap-6 text-[9px] tracking-[.14em] uppercase"><a href="#collections">Collections</a><a href="#shop">Boutique</a><a href="/journal">Journal</a><a href="/pages/contact">Contact</a><a href="/pages/a-propos">La Maison</a><a href="/pages/livraison">Livraison</a><a href="/pages/confidentialite">Confidentialité</a></nav><span className="text-[9px] text-white/50">© MIREZA CARIBBEAN</span></div></footer>
