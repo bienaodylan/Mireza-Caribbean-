@@ -3,7 +3,7 @@ import { MirezaHome } from './components/MirezaHome';
 import { ShopPage, ProductPage, AccountPage, CollectionsPage, CollectionDetailPage, CategoryPage, DiscoveryPage, JournalPage, JournalArticlePage, CartPage, CheckoutPage, InstitutionalPage, StoreShell, AdminDashboard, NotFound, WishlistPage } from './pages/StorePages';
 
 export default function App() {
-  const path = window.location.pathname.replace(/\\/+$/, '') || '/';
+  const path = window.location.pathname.replace(/\/+$/, '') || '/';
   const segment = (n:number) => decodeURIComponent(path.split('/')[n] || '');
   // Administration stays on its own shell and is never rendered inside the public storefront.
   if (path === '/admin') return <AdminDashboard />;
